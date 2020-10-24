@@ -16,7 +16,7 @@ var employees = [{"name":"Alex","surname":"Yavkin","position":"sr. engineer","de
 	position: 'engineer',
 	department: 'UX'
 }
-
+// first function
 function devOpsEmployees(employees) {
 	const result = [];
 	const requiredSalary = 23000;
@@ -40,12 +40,66 @@ function devOpsEmployees(employees) {
 			}
 		}
 	}
-  return result;
+	for (let i = 0; i < result.length; i++) {
+		console.log(result[i]);
+	}
+}
+devOpsEmployees(employees);
+
+ function extraFunction(employees, employeeAmount){
+	for (let i = 0; i < employeeAmount.length; i++) {
+		for (let j = 0; j < employeeAmount.length; j++) {
+			if(JSON.stringify(employeeAmount[i]) == JSON.stringify(employeeAmount[j]) && i != j){
+					employeeAmount.splice(j,1);
+			}
+		}
+	}
+	return employeeAmount
+ }
+
+ // second function
+function countDepartments(employees) {
+	var employeeAmount = [];
+	let counter = 0;
+	for(let i = 0; i < employees.length; i++){
+		for (let j = 0; j < employees.length; j++) {
+			if (employees[i].department == employees[j].department){
+				counter++;
+			}
+		}
+		employeeAmount[i] = [employees[i].department, counter]
+		counter = 0;
+	}
+
+	employeeAmount = extraFunction(employees, employeeAmount);
+
+	for (let i = 0; i < employeeAmount.length; i++){
+		for (let j = 0; j < employeeAmount.length; j++){
+				if(JSON.stringify(employeeAmount[i]) == JSON.stringify(employeeAmount[j])){
+					employeeAmount = extraFunction(employees, employeeAmount);
+				}
+			}
+		}
+	return employeeAmount;
 }
 
- // should show the result
- console.log(devOpsEmployees(employees));
-
-
-
+function sotringFunction(employeeAmount) {
+	for (let i = 0; i < employeeAmount.length; i++) {
+		for (let j = 0; j < employeeAmount.length; j++) {
+			var firstVariable = employeeAmount[i]
+			var secondVariable = employeeAmount[j]
+			if(firstVariable[1] < secondVariable[1]){
+				let temporary = employeeAmount[i];
+				employeeAmount[i] = employeeAmount[j];
+				employeeAmount[j] = temporary;
+			}
+		}
+	}	
+	for (let i = 0; i < employeeAmount.length; i++) {
+		var newVariable = employeeAmount[i]
+		finalResult = newVariable[0] + ":" + newVariable[1];
+		console.log(finalResult);
+	}
+}
+sotringFunction(countDepartments(employees));
 
