@@ -17,37 +17,35 @@ var employees = [{"name":"Alex","surname":"Yavkin","position":"sr. engineer","de
 	department: 'UX'
 }
 
-function yourFunction(employees) {
-  const result = [];
-	/* Write your code here */
+function devOpsEmployees(employees) {
+	const result = [];
+	const requiredSalary = 23000;
+	let counter = 0;
+	for (let i = 0; i < employees.length; i++) {
+		if (employees[i].department == "DevOps" && employees[i].salary > requiredSalary){
+			employee = employees[i];
+			result[counter] = employee;
+			counter++;
+		}
+		
+	}
+	for (let i = 0; i < result.length; i++){
+		for(let j = 0; j < result.length; j++){
+			let firstDate = new Date(result[i].birthday)
+			let secondDate = new Date(result[j].birthday)
+			if(firstDate < secondDate){
+				let temporary = result[i];
+				result[i] = result[j];
+				result[j] = temporary;
+			}
+		}
+	}
   return result;
 }
 
  // should show the result
-console.log(yourFunction(employees));
+ console.log(devOpsEmployees(employees));
 
 
 
-/**
- * Example function
- * Finds employees who has max salaries
- */
-function exampleFunction(employees) {
-	var maxSalary = 10000;
-	for (let i = 0; i < employees.length; i++) {
-		if (employees[i].salary > maxSalary) {
-			maxSalary = employees[i].salary;
-		}
-	}
-	const result = [];
-	for (let i = 0; i < employees.length; i++) {
-		if (employees[i].salary === maxSalary) {
-			result.push(employees[i]);
-		}
-	}
-	return result;
-}
-
-// uncomment to observe example
-console.log(exampleFunction(employees));
 
