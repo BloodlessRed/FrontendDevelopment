@@ -1,2 +1,2 @@
-# FrontendDevelopment
-A repository with frontend projects that belongs to Maxim Maskeev
+# FrontendDevelopment (JavaScript)
+This branch is dedicated to JavaScript works only
