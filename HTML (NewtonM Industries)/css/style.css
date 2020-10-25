@@ -1,0 +1,52 @@
+			/* Rectangle 1 */
+		.headerRectangle{
+			position: absolute;
+			width: 100%;
+			height: 82px;
+			top: 49px;
+			/*z-index: 0;*/
+			background: #376DBD;
+			display: flex;
+			align-items: center;			
+			
+		}
+		header{
+			width:100%;
+			height: 17.3%
+		}
+		body{
+
+			width:100vw;
+			height: 100vh;
+			margin: 0;
+		}
+		.forward{
+			position: absolute;
+			left: 16%;
+		}
+		.textAlignmentWrap{
+			width: 40%;
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			padding: 0 10px;
+			margin-left: 20%;
+
+		}
+			/* Services */
+		.headerText{
+			font-family: Noto Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 25px;
+			color: #FFFFFF;
+		}
+		.textMargin{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			margin: 0 23px;
+		}
+
