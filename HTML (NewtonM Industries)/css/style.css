@@ -2,6 +2,8 @@
 
 		.mainContentWrapper{
 			padding: 0 64px;
+			background: #F0EFEF;
+
 		}
 		header{
 			width:100%;
@@ -112,8 +114,9 @@
 		.sectionOne{
 			display: flex;
 			flex-direction: row;
-			
+			align-items: center;			
 		}
+
 
 		.title{
 			font-family: Roboto Condensed;
@@ -143,12 +146,14 @@
 		.searchBarBox{
 			width: 310px;
 			height: 197px;
-
 			background: #FFFFFF;
 			border-radius: 3px;
 
-			width: 310px;
+*/		}
+		.searchBarBoxLine{
+			width: 304px;
 			height: 0px;
 
 			border: 3px solid #0066FF;
+	
 		}
