@@ -385,4 +385,8 @@
 		.itemLineUp td{
 			margin: 0 8%;
 		}
+		.clearingButton{
+			width: 20%;
+			align-self: center;
+		}
 		/*End of Pop-ip section*/
