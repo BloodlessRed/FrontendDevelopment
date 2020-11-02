@@ -25,14 +25,18 @@ function addCounterToPopUp(){
 
 function goodsInCart(id) {
   let mainContainer = document.getElementById("goodsTable");
+  let arrayOfItems = document.getElementsByClassName("itemLineUp")
   let localCounter = 0
-  for (let i = 0; i < mainContainer.childNodes.length; i++) {
-    console.log(mainContainer.childNodes[1]);
-    if (mainContainer.childNodes[i].innerText == arrayOfGoods[id-1][0]){
-      localCounter++;
-    }
-  }
-  console.log(localCounter);
+  // if (arrayOfItems.length > 1) {
+  //   for (let i = 0; i < arrayOfItems.length; i++) {
+  //     if (arrayOfItems[i].childNodes[0].childNodes[0].nodeValue == arrayOfGoods[id-1][0]){
+  //       localCounter++;
+  //     }
+  //   }
+  // }
+  // console.log(mainContainer.childNodes[1]);
+  // console.log(localCounter);
+  // console.log(typeof arrayOfItems);
   if(localCounter == 0){
     let newcommodity = document.createElement("tr");
     newcommodity.classList.add("itemLineUp");
@@ -64,5 +68,16 @@ function hideCart() {
   document.getElementById("shadow").classList.remove("showBlackBox");
   document.getElementById("goodsCart").classList.add("hide");
   document.getElementById("shadow").classList.add("hideBlackBox");
+}
 
+function removeAllItems() {
+  let goodsList = document.getElementById("goodsTable");
+  let items = document.getElementsByClassName("itemLineUp")
+  while (items.length != 0) {
+    goodsList.removeChild(items[0]);
+  }
+  let popUp = document.getElementById("bubblePopUp");
+  popUp.innerHTML = 0;
+  popUp.classList.remove("show");
+  popUp.classList.add("hide");
 }
