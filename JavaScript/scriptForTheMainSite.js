@@ -17,8 +17,10 @@ function addCounterToPopUp(){
   }else{
     counter++;
     let popUp = document.getElementById("bubblePopUp");
-    popUp.classList.remove("hide");
-    popUp.classList.add("show");
+    if (counter == 1) {
+      popUp.classList.remove("hide");
+      popUp.classList.add("show");
+    }
     popUp.innerHTML = counter;
   }
 }
@@ -77,7 +79,8 @@ function removeAllItems() {
     goodsList.removeChild(items[0]);
   }
   let popUp = document.getElementById("bubblePopUp");
-  popUp.innerHTML = 0;
+  counter = 0;
+  popUp.innerHTML = counter;
   popUp.classList.remove("show");
   popUp.classList.add("hide");
 }
