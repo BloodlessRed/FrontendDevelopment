@@ -37,16 +37,7 @@ function goodsInCart(id) {
   arrayOfCounters[id]++;     
   }
   console.log(arrayOfCounters);
-  // if (arrayOfItems.length > 1) {
-  //   for (let i = 0; i < arrayOfItems.length; i++) {
-  //     if (arrayOfItems[i].childNodes[0].childNodes[0].nodeValue == arrayOfGoods[id-1][0]){
-  //       localCounter++;
-  //     }
-  //   }
-  // }
-  // console.log(mainContainer.childNodes[1]);
-  // console.log(localCounter);
-  // console.log(typeof arrayOfItems);
+  
   if(arrayOfCounters[id] == 1){
     let newcommodity = document.createElement("tr");
     newcommodity.classList.add("itemLineUp");
