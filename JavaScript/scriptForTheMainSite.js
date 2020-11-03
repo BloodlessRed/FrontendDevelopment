@@ -9,6 +9,7 @@ var arrayOfGoods =
   ["Atlas Copco Nutrunner 2", 3240],
   ["Atlas Copco Nutrunner 3", 5000]
 ]
+var arrayOfCounters = [];
 function addCounterToPopUp(){
   if (counter != 0) {
     counter++;
@@ -27,8 +28,15 @@ function addCounterToPopUp(){
 
 function goodsInCart(id) {
   let mainContainer = document.getElementById("goodsTable");
-  let arrayOfItems = document.getElementsByClassName("itemLineUp")
-  let localCounter = 0
+  let arrayOfItems = document.getElementsByClassName("itemLineUp");
+
+  if (arrayOfCounters[id] == undefined) {
+  arrayOfCounters[id] = 0;
+  arrayOfCounters[id]++;  
+  }else{
+  arrayOfCounters[id]++;     
+  }
+  console.log(arrayOfCounters);
   // if (arrayOfItems.length > 1) {
   //   for (let i = 0; i < arrayOfItems.length; i++) {
   //     if (arrayOfItems[i].childNodes[0].childNodes[0].nodeValue == arrayOfGoods[id-1][0]){
@@ -39,7 +47,7 @@ function goodsInCart(id) {
   // console.log(mainContainer.childNodes[1]);
   // console.log(localCounter);
   // console.log(typeof arrayOfItems);
-  if(localCounter == 0){
+  if(arrayOfCounters[id] == 1){
     let newcommodity = document.createElement("tr");
     newcommodity.classList.add("itemLineUp");
     let localArray = []
@@ -47,16 +55,22 @@ function goodsInCart(id) {
       localArray.push(document.createElement("td"))
     }
     localArray[0].innerText = arrayOfGoods[id-1][0];
+    localArray[0].classList.add("firstCell");
     localArray[1].innerText = 1;
     localArray[2].innerText = arrayOfGoods[id-1][1];
     for (let i = 0; i < localArray.length; i++) {
       newcommodity.appendChild(localArray[i]);      
     }
     mainContainer.appendChild(newcommodity);
+  }else{
+    for (let i = 0; i < arrayOfItems.length; i++) {
+      if (arrayOfItems[i].childNodes[0].childNodes[0].nodeValue == arrayOfGoods[id-1][0]){
+        arrayOfItems[i].childNodes[1].childNodes[0].nodeValue = arrayOfCounters[id];
+      }
     }
-  else{
-    console.log(1);
+    console.log(arrayOfItems);
   }
+    
 }
 
 function revealCart() {
