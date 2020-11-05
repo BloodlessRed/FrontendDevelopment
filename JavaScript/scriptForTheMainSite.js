@@ -36,7 +36,6 @@ function goodsInCart(id) {
   }else{
   arrayOfCounters[id]++;     
   }
-  console.log(arrayOfCounters);
   
   if(arrayOfCounters[id] == 1){
     let newcommodity = document.createElement("tr");
@@ -59,7 +58,6 @@ function goodsInCart(id) {
         arrayOfItems[i].childNodes[1].childNodes[0].nodeValue = arrayOfCounters[id];
       }
     }
-    console.log(arrayOfItems);
   }
     
 }
@@ -85,6 +83,7 @@ function removeAllItems() {
   }
   let popUp = document.getElementById("bubblePopUp");
   counter = 0;
+  arrayOfCounters.length = 0;
   popUp.innerHTML = counter;
   popUp.classList.remove("show");
   popUp.classList.add("hide");
