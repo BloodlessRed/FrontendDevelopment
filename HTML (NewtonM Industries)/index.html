@@ -6,14 +6,18 @@
   </head>
   <body>
     <div class="blackBox hideBlackBox" id="shadow">
+      <div class="loading-screen hide" id="loader">
+        <p>Loading</p>
+        <img src="img/LoadingPic.png" class="loading-picture">
+      </div>  
       <div class="goodsPopUp hide" id="goodsCart">
         <div class="exitPopUp" onclick="hideCart()">X</div>
         <table class="popUpTable">
           <tbody id="goodsTable">
             <tr class="headOfTable">
               <td class="firstCell">Title</td>
-              <td>Count</td>
-              <td>Price</td>
+              <td class="second-cell">Count</td>
+              <td>Total price</td>
             </tr>
           </tbody>
         </table>

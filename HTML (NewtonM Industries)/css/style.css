@@ -204,7 +204,7 @@
 			width: 208px;
 			height: 43px;
 			background: #FFFFFF;
-			border: 0.5px solid #C4C4C4;
+			border: 1px solid #C4C4C4;
 			box-sizing: border-box;
 			border-radius: 2px;
 		}
@@ -355,6 +355,7 @@
 		}
 		.showBlackBox{
 			display: flex;
+			animation: ease-in 1s;
 		}
 		.hideBlackBox{
 			display: none;
@@ -362,6 +363,10 @@
 		@keyframes fadeIn{
 			from {opacity: 0;}
 			to {opacity: 1;}
+		}
+		@keyframes rotation{
+			from {transform: rotate(0deg);}
+			to {transform: rotate(360deg);}
 		}
 		.popUpTable{
 			margin: 0 12%;
@@ -379,6 +384,9 @@
 		.firstCell{
 			flex: 2;
 		}
+		.second-cell{
+			width: 20%;
+		}
 		.mainPartOfThisTable{
 			display: flex;
 		}
@@ -392,5 +400,27 @@
 		.clearingButton{
 			width: 20%;
 			align-self: center;
+		}
+		.loading-screen{
+			position: absolute;
+			width: 20%;
+			height: 20%;
+			border-radius: 5px;
+			font-family: Noto Sans;
+			background-color: white;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 25px;
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+
+			align-self: center;
+			justify-self: center;
+		}
+		.loading-picture{
+			max-height: 50%;
+			animation:rotation 10s infinite ;
 		}
 		/*End of Pop-ip section*/

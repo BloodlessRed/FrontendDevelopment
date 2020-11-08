@@ -47,6 +47,7 @@ function goodsInCart(id) {
     localArray[0].innerText = arrayOfGoods[id-1][0];
     localArray[0].classList.add("firstCell");
     localArray[1].innerText = 1;
+    localArray[1].classList.add("second-cell");
     localArray[2].innerText = arrayOfGoods[id-1][1];
     for (let i = 0; i < localArray.length; i++) {
       newcommodity.appendChild(localArray[i]);      
@@ -56,6 +57,8 @@ function goodsInCart(id) {
     for (let i = 0; i < arrayOfItems.length; i++) {
       if (arrayOfItems[i].childNodes[0].childNodes[0].nodeValue == arrayOfGoods[id-1][0]){
         arrayOfItems[i].childNodes[1].childNodes[0].nodeValue = arrayOfCounters[id];
+        arrayOfItems[i].childNodes[2].innerText = arrayOfGoods[id-1][1] * arrayOfCounters[id];
+        console.log(arrayOfItems);
       }
     }
   }
@@ -63,10 +66,16 @@ function goodsInCart(id) {
 }
 
 function revealCart() {
+  let loader = document.getElementById("loader");
+  let blackBox = document.getElementById("shadow");
+  loader.classList.toggle("hide");
+  blackBox.classList.remove("hideBlackBox");
+  blackBox.classList.add("showBlackBox"); 
+  setTimeout(() => {
+  loader.classList.toggle('hide');
   document.getElementById("goodsCart").classList.remove("hide");
-  document.getElementById("shadow").classList.remove("hideBlackBox");
   document.getElementById("goodsCart").classList.add("showCart");
-  document.getElementById("shadow").classList.add("showBlackBox");
+  }, 5000);
 }
 function hideCart() {
   document.getElementById("goodsCart").classList.remove("showCart");
@@ -74,6 +83,14 @@ function hideCart() {
   document.getElementById("goodsCart").classList.add("hide");
   document.getElementById("shadow").classList.add("hideBlackBox");
 }
+// function hideCartAutomatically() {
+//   setTimeout(() => {
+//     document.getElementById("goodsCart").classList.remove("showCart");
+//     document.getElementById("shadow").classList.remove("showBlackBox");
+//     document.getElementById("goodsCart").classList.add("hide");
+//     document.getElementById("shadow").classList.add("hideBlackBox");
+//     }, 5000);
+// }
 
 function removeAllItems() {
   let goodsList = document.getElementById("goodsTable");
