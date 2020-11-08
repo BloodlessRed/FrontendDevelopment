@@ -47,8 +47,9 @@ function goodsInCart(id) {
     localArray[0].innerText = arrayOfGoods[id-1][0];
     localArray[0].classList.add("firstCell");
     localArray[1].innerText = 1;
-    localArray[1].classList.add("second-cell");
+    localArray[1].classList.add("other-cells");
     localArray[2].innerText = arrayOfGoods[id-1][1];
+    localArray[2].classList.add("other-cells");
     for (let i = 0; i < localArray.length; i++) {
       newcommodity.appendChild(localArray[i]);      
     }
@@ -75,7 +76,7 @@ function revealCart() {
   loader.classList.toggle('hide');
   document.getElementById("goodsCart").classList.remove("hide");
   document.getElementById("goodsCart").classList.add("showCart");
-  }, 5000);
+  }, 3000);
 }
 function hideCart() {
   document.getElementById("goodsCart").classList.remove("showCart");

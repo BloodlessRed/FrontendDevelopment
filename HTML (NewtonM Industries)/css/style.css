@@ -384,8 +384,9 @@
 		.firstCell{
 			flex: 2;
 		}
-		.second-cell{
-			width: 20%;
+		.other-cells{
+			width: 10%;
+			text-align: center;
 		}
 		.mainPartOfThisTable{
 			display: flex;
@@ -393,6 +394,7 @@
 		.itemLineUp{
 			display: flex;
 			justify-content: space-evenly;
+			margin: 5px 0px;
 		}
 		.itemLineUp td{
 			margin: 0 8%;
