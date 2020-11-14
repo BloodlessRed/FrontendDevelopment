@@ -11,7 +11,7 @@ let arrayOfGoods =
 ]
 let itemsInCartMap = new Map();
 let arrayOfCounters = [];
-let addCounterToPopUp = () => {
+const addCounterToPopUp = () => {
   if (counter != 0) {
     counter++;
     let popUp = document.getElementById("bubblePopUp");
@@ -27,15 +27,15 @@ let addCounterToPopUp = () => {
   }
 }
 
-let addNewItemInMap = (id) => {
+const addNewItemInMap = (id) => {
   itemsInCartMap.set(id, [arrayOfGoods[id-1][0], 1, arrayOfGoods[id-1][1]]);
 }
 
-let modifyExistingItemInMap = (id) => {
+const modifyExistingItemInMap = (id) => {
   itemsInCartMap.set(id, [arrayOfGoods[id-1][0], arrayOfCounters[id], arrayOfGoods[id-1][1] * arrayOfCounters[id]])
 }
 
-let goodsInCart = (id) => {
+const goodsInCart = (id) => {
   let mainContainer = document.getElementById("goodsTable");
   let arrayOfItems = document.getElementsByClassName("item-line-up");
 
@@ -72,7 +72,7 @@ let goodsInCart = (id) => {
   // console.log(itemsInCartMap);
 }
 
-let revealCart = () => {
+const revealCart = () => {
   let loader = document.getElementById("loader");
   let blackBox = document.getElementById("shadow");
   loader.classList.toggle("hide");
@@ -85,14 +85,14 @@ let revealCart = () => {
   }, 2000);
 }
 
-let hideCart = () => {
+const hideCart = () => {
   document.getElementById("goodsCart").classList.remove("showCart");
   document.getElementById("shadow").classList.remove("showBlackBox");
   document.getElementById("goodsCart").classList.add("hide");
   document.getElementById("shadow").classList.add("hideBlackBox");
 }
 
-let removeAllItems = () => {
+const removeAllItems = () => {
   let goodsList = document.getElementById("goodsTable");
   let items = document.getElementsByClassName("item-line-up")
   while (items.length != 0) {
