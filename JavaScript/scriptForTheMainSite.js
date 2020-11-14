@@ -27,6 +27,14 @@ let addCounterToPopUp = () => {
   }
 }
 
+let addNewItemInMap = (id) => {
+  itemsInCartMap.set(id, [arrayOfGoods[id-1][0], 1, arrayOfGoods[id-1][1]]);
+}
+
+let modifyExistingItemInMap = (id) => {
+  itemsInCartMap.set(id, [arrayOfGoods[id-1][0], arrayOfCounters[id], arrayOfGoods[id-1][1] * arrayOfCounters[id]])
+}
+
 let goodsInCart = (id) => {
   let mainContainer = document.getElementById("goodsTable");
   let arrayOfItems = document.getElementsByClassName("item-line-up");
@@ -37,13 +45,9 @@ let goodsInCart = (id) => {
   }else{
   arrayOfCounters[id]++;     
   }
-  let mapKeys = itemsInCartMap.keys();
-  let keyExists = false;
-  for (let keys of mapKeys){
-    if (keys == id){
-      keyExists = true;
-    }
-  }
+
+  let keyExists = itemsInCartMap.has(id);
+
   if(keyExists == false){
     let newcommodity =
     `<tr class = "item-line-up">
@@ -52,10 +56,12 @@ let goodsInCart = (id) => {
       <td class = "other-cells">${arrayOfGoods[id-1][1]}</td>      
       </tr>`;
     mainContainer.insertAdjacentHTML("beforeend",newcommodity);
-    itemsInCartMap.set(`${id}`, [arrayOfGoods[id-1][0], 1, arrayOfGoods[id-1][1]])
+    addNewItemInMap(id);
+
   }else{
-    itemsInCartMap.set(`${id}`, [arrayOfGoods[id-1][0], arrayOfCounters[id], arrayOfGoods[id-1][1] * arrayOfCounters[id]])
-    let pickedItems = itemsInCartMap.get(`${id}`)
+
+    modifyExistingItemInMap(id);
+    let pickedItems = itemsInCartMap.get(id)
     for (let i = 0; i < arrayOfItems.length; i++) {
       if (arrayOfItems[i].children[0].innerText == pickedItems[0]){
         arrayOfItems[i].children[1].innerText = pickedItems[1];
@@ -63,7 +69,7 @@ let goodsInCart = (id) => {
       }
     }
   }
-  console.log(itemsInCartMap);
+  // console.log(itemsInCartMap);
 }
 
 let revealCart = () => {
@@ -98,5 +104,5 @@ let removeAllItems = () => {
   popUp.innerHTML = counter;
   popUp.classList.remove("show");
   popUp.classList.add("hide");
-  itemsInCartMap = new Map();
+  itemsInCartMap.clear();
 }
