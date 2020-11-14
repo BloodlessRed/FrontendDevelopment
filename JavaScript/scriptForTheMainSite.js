@@ -1,6 +1,6 @@
-var counter = 0
-var counterOfGoods = 1;
-var arrayOfGoods = 
+let counter = 0
+let counterOfGoods = 1;
+let arrayOfGoods = 
 [
   ["Atlas Copco 4220-0982-15 15 meter Cable", 2000],
   ["Atlas Copco 4220-1007-10 10 meter Extension Cable", 2100],
@@ -9,8 +9,9 @@ var arrayOfGoods =
   ["Atlas Copco Nutrunner 2", 3240],
   ["Atlas Copco Nutrunner 3", 5000]
 ]
-var arrayOfCounters = [];
-function addCounterToPopUp(){
+let itemsInCartMap = new Map();
+let arrayOfCounters = [];
+let addCounterToPopUp = () => {
   if (counter != 0) {
     counter++;
     let popUp = document.getElementById("bubblePopUp");
@@ -26,9 +27,9 @@ function addCounterToPopUp(){
   }
 }
 
-function goodsInCart(id) {
+let goodsInCart = (id) => {
   let mainContainer = document.getElementById("goodsTable");
-  let arrayOfItems = document.getElementsByClassName("itemLineUp");
+  let arrayOfItems = document.getElementsByClassName("item-line-up");
 
   if (arrayOfCounters[id] == undefined) {
   arrayOfCounters[id] = 0;
@@ -36,37 +37,36 @@ function goodsInCart(id) {
   }else{
   arrayOfCounters[id]++;     
   }
-  
-  if(arrayOfCounters[id] == 1){
-    let newcommodity = document.createElement("tr");
-    newcommodity.classList.add("itemLineUp");
-    let localArray = []
-    for (let i = 0; i < 3; i++) {
-      localArray.push(document.createElement("td"))
+  let mapKeys = itemsInCartMap.keys();
+  let keyExists = false;
+  for (let keys of mapKeys){
+    if (keys == id){
+      keyExists = true;
     }
-    localArray[0].innerText = arrayOfGoods[id-1][0];
-    localArray[0].classList.add("firstCell");
-    localArray[1].innerText = 1;
-    localArray[1].classList.add("other-cells");
-    localArray[2].innerText = arrayOfGoods[id-1][1];
-    localArray[2].classList.add("other-cells");
-    for (let i = 0; i < localArray.length; i++) {
-      newcommodity.appendChild(localArray[i]);      
-    }
-    mainContainer.appendChild(newcommodity);
+  }
+  if(keyExists == false){
+    let newcommodity =
+    `<tr class = "item-line-up">
+      <td class = "first-cell">${arrayOfGoods[id-1][0]}</td>
+      <td class = "other-cells">1</td>
+      <td class = "other-cells">${arrayOfGoods[id-1][1]}</td>      
+      </tr>`;
+    mainContainer.insertAdjacentHTML("beforeend",newcommodity);
+    itemsInCartMap.set(`${id}`, [arrayOfGoods[id-1][0], 1, arrayOfGoods[id-1][1]])
   }else{
+    itemsInCartMap.set(`${id}`, [arrayOfGoods[id-1][0], arrayOfCounters[id], arrayOfGoods[id-1][1] * arrayOfCounters[id]])
+    let pickedItems = itemsInCartMap.get(`${id}`)
     for (let i = 0; i < arrayOfItems.length; i++) {
-      if (arrayOfItems[i].childNodes[0].childNodes[0].nodeValue == arrayOfGoods[id-1][0]){
-        arrayOfItems[i].childNodes[1].childNodes[0].nodeValue = arrayOfCounters[id];
-        arrayOfItems[i].childNodes[2].innerText = arrayOfGoods[id-1][1] * arrayOfCounters[id];
-        console.log(arrayOfItems);
+      if (arrayOfItems[i].children[0].innerText == pickedItems[0]){
+        arrayOfItems[i].children[1].innerText = pickedItems[1];
+        arrayOfItems[i].children[2].innerText = pickedItems[2];
       }
     }
   }
-    
+  console.log(itemsInCartMap);
 }
 
-function revealCart() {
+let revealCart = () => {
   let loader = document.getElementById("loader");
   let blackBox = document.getElementById("shadow");
   loader.classList.toggle("hide");
@@ -76,26 +76,19 @@ function revealCart() {
   loader.classList.toggle('hide');
   document.getElementById("goodsCart").classList.remove("hide");
   document.getElementById("goodsCart").classList.add("showCart");
-  }, 3000);
+  }, 2000);
 }
-function hideCart() {
+
+let hideCart = () => {
   document.getElementById("goodsCart").classList.remove("showCart");
   document.getElementById("shadow").classList.remove("showBlackBox");
   document.getElementById("goodsCart").classList.add("hide");
   document.getElementById("shadow").classList.add("hideBlackBox");
 }
-// function hideCartAutomatically() {
-//   setTimeout(() => {
-//     document.getElementById("goodsCart").classList.remove("showCart");
-//     document.getElementById("shadow").classList.remove("showBlackBox");
-//     document.getElementById("goodsCart").classList.add("hide");
-//     document.getElementById("shadow").classList.add("hideBlackBox");
-//     }, 5000);
-// }
 
-function removeAllItems() {
+let removeAllItems = () => {
   let goodsList = document.getElementById("goodsTable");
-  let items = document.getElementsByClassName("itemLineUp")
+  let items = document.getElementsByClassName("item-line-up")
   while (items.length != 0) {
     goodsList.removeChild(items[0]);
   }
@@ -105,4 +98,5 @@ function removeAllItems() {
   popUp.innerHTML = counter;
   popUp.classList.remove("show");
   popUp.classList.add("hide");
+  itemsInCartMap = new Map();
 }

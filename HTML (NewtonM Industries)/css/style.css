@@ -381,7 +381,7 @@
 		.headOfTable td{
 			text-align: center;
 		}
-		.firstCell{
+		.first-cell{
 			flex: 2;
 		}
 		.other-cells{
@@ -391,12 +391,12 @@
 		.mainPartOfThisTable{
 			display: flex;
 		}
-		.itemLineUp{
+		.item-line-up{
 			display: flex;
 			justify-content: space-evenly;
 			margin: 5px 0px;
 		}
-		.itemLineUp td{
+		.item-line-up td{
 			margin: 0 8%;
 		}
 		.clearingButton{
