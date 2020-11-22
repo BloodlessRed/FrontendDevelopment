@@ -28,11 +28,11 @@ const addCounterToPopUp = () => {
 }
 
 const addNewItemInMap = (id) => {
-  itemsInCartMap.set(id, [arrayOfGoods[id-1][0], 1, arrayOfGoods[id-1][1]]);
+  itemsInCartMap.set(id, [arrayOfGoods[id][0], 1, arrayOfGoods[id][1]]);
 }
 
 const modifyExistingItemInMap = (id) => {
-  itemsInCartMap.set(id, [arrayOfGoods[id-1][0], arrayOfCounters[id], arrayOfGoods[id-1][1] * arrayOfCounters[id]])
+  itemsInCartMap.set(id, [arrayOfGoods[id][0], arrayOfCounters[id], arrayOfGoods[id][1] * arrayOfCounters[id]])
 }
 
 const goodsInCart = (id) => {
@@ -51,9 +51,9 @@ const goodsInCart = (id) => {
   if(keyExists == false){
     let newcommodity =
     `<tr class = "item-line-up">
-      <td class = "first-cell">${arrayOfGoods[id-1][0]}</td>
-      <td class = "other-cells">1</td>
-      <td class = "other-cells">${arrayOfGoods[id-1][1]}</td>      
+      <td class = "first-cell">${arrayOfGoods[id][0]}</td>
+      <td class = "amount-of-items"><button onclick="action(this,'sub')">-</button><input class="input-counter" value = 1 disabled><button onclick="action(this,'add')">+</button></td>
+      <td class = "other-cells">${arrayOfGoods[id][1]}</td>      
       </tr>`;
     mainContainer.insertAdjacentHTML("beforeend",newcommodity);
     addNewItemInMap(id);
@@ -64,12 +64,51 @@ const goodsInCart = (id) => {
     let pickedItems = itemsInCartMap.get(id)
     for (let i = 0; i < arrayOfItems.length; i++) {
       if (arrayOfItems[i].children[0].innerText == pickedItems[0]){
-        arrayOfItems[i].children[1].innerText = pickedItems[1];
+        arrayOfItems[i].children[1].children[1].value = pickedItems[1];
         arrayOfItems[i].children[2].innerText = pickedItems[2];
       }
     }
   }
   // console.log(itemsInCartMap);
+}
+
+const action = (ele, action) => {
+
+  let parent = ele.parentElement;
+  let superiorParent = parent.parentElement;
+  let price = 0;
+  let valuesOfMap =Array.from(itemsInCartMap.values()) ;
+  for (let i = 0; i < valuesOfMap.length; i++) {
+    for (let j = 0; j < valuesOfMap[i].length; j++) {
+      if (valuesOfMap[i][j] == superiorParent.children[0].innerText){
+        price = arrayOfGoods[i][1];
+      }
+
+    }
+  }
+  console.log(parent);
+  console.log(superiorParent);
+
+  if(action == "sub"){
+    if(parseInt(parent.children[1].value) - 1 >= 0){
+      parent.children[1].value = parseInt(parent.children[1].value) - 1;
+    }
+  }else if (action == "add"){
+    parent.children[1].value = parseInt(parent.children[1].value) + 1;
+  }
+  superiorParent.children[2].innerText = parseInt(parent.children[1].value) * price;
+  console.log(parent.children[1].value)
+
+  for (let i = 0; i < valuesOfMap.length; i++) {
+    for (let j = 0; j < valuesOfMap[i].length; j++) {
+      console.log(superiorParent.children[0].innerText)
+      if (valuesOfMap[i][j] == superiorParent.children[0].innerText){
+        itemsInCartMap.set(i,[arrayOfGoods[i][0], parseInt(parent.children[1].value), parseInt(parent.children[1].value) * price])
+        return;
+      }
+    }
+  }
+
 }
 
 const revealCart = () => {
