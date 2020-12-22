@@ -1,3 +1,49 @@
+class CounterObject{
+
+  constructor(){
+    this.subtraction = `<button onclick="CounterObject.action(this,'sub')">-</button>`;
+    this.input = `<input class="input-counter" value = 1 disabled>`;
+    this.addition = `<button onclick="CounterObject.action(this,'add')">+</button>`;
+    this.test = () => {console.log("succ");}
+  }
+  static action(ele, action){
+
+    let parent = ele.parentElement;
+    let superiorParent = parent.parentElement;
+    let price = 0;
+    let valuesOfMap =Array.from(itemsInCartMap.values()) ;
+    for (let i = 0; i < valuesOfMap.length; i++) {
+      for (let j = 0; j < valuesOfMap[i].length; j++) {
+        if (valuesOfMap[i][j] == superiorParent.children[0].innerText){
+          price = arrayOfGoods[i][1];
+        }
+  
+      }
+    }
+  
+    if(action == "sub"){
+      if(parseInt(parent.children[1].value) - 1 >= 0){
+        parent.children[1].value = parseInt(parent.children[1].value) - 1;
+      }
+    }else if (action == "add"){
+      parent.children[1].value = parseInt(parent.children[1].value) + 1;
+    }
+    superiorParent.children[2].innerText = parseInt(parent.children[1].value) * price;
+    console.log(parent.children[1].value)
+  
+    for (let i = 0; i < valuesOfMap.length; i++) {
+      for (let j = 0; j < valuesOfMap[i].length; j++) {
+        console.log(superiorParent.children[0].innerText)
+        if (valuesOfMap[i][j] == superiorParent.children[0].innerText){
+          itemsInCartMap.set(i,[arrayOfGoods[i][0], parseInt(parent.children[1].value), parseInt(parent.children[1].value) * price])
+          return;
+        }
+      }
+    }
+  }
+}
+let newCounterElement = new CounterObject();
+
 let counter = 0
 let counterOfGoods = 1;
 let arrayOfGoods = 
@@ -38,7 +84,8 @@ const modifyExistingItemInMap = (id) => {
 const goodsInCart = (id) => {
   let mainContainer = document.getElementById("goodsTable");
   let arrayOfItems = document.getElementsByClassName("item-line-up");
-
+  console.log(newCounterElement);
+  newCounterElement.test();
   if (arrayOfCounters[id] == undefined) {
   arrayOfCounters[id] = 0;
   arrayOfCounters[id]++;  
@@ -52,7 +99,7 @@ const goodsInCart = (id) => {
     let newcommodity =
     `<tr class = "item-line-up">
       <td class = "first-cell">${arrayOfGoods[id][0]}</td>
-      <td class = "amount-of-items"><button onclick="action(this,'sub')">-</button><input class="input-counter" value = 1 disabled><button onclick="action(this,'add')">+</button></td>
+      <td class = "amount-of-items">${newCounterElement.subtraction}${newCounterElement.input}${newCounterElement.addition}</td>
       <td class = "other-cells">${arrayOfGoods[id][1]}</td>      
       </tr>`;
     mainContainer.insertAdjacentHTML("beforeend",newcommodity);
@@ -72,44 +119,6 @@ const goodsInCart = (id) => {
   // console.log(itemsInCartMap);
 }
 
-const action = (ele, action) => {
-
-  let parent = ele.parentElement;
-  let superiorParent = parent.parentElement;
-  let price = 0;
-  let valuesOfMap =Array.from(itemsInCartMap.values()) ;
-  for (let i = 0; i < valuesOfMap.length; i++) {
-    for (let j = 0; j < valuesOfMap[i].length; j++) {
-      if (valuesOfMap[i][j] == superiorParent.children[0].innerText){
-        price = arrayOfGoods[i][1];
-      }
-
-    }
-  }
-  console.log(parent);
-  console.log(superiorParent);
-
-  if(action == "sub"){
-    if(parseInt(parent.children[1].value) - 1 >= 0){
-      parent.children[1].value = parseInt(parent.children[1].value) - 1;
-    }
-  }else if (action == "add"){
-    parent.children[1].value = parseInt(parent.children[1].value) + 1;
-  }
-  superiorParent.children[2].innerText = parseInt(parent.children[1].value) * price;
-  console.log(parent.children[1].value)
-
-  for (let i = 0; i < valuesOfMap.length; i++) {
-    for (let j = 0; j < valuesOfMap[i].length; j++) {
-      console.log(superiorParent.children[0].innerText)
-      if (valuesOfMap[i][j] == superiorParent.children[0].innerText){
-        itemsInCartMap.set(i,[arrayOfGoods[i][0], parseInt(parent.children[1].value), parseInt(parent.children[1].value) * price])
-        return;
-      }
-    }
-  }
-
-}
 
 const revealCart = () => {
   let loader = document.getElementById("loader");
