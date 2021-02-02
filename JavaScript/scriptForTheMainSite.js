@@ -46,13 +46,13 @@ class CounterObject{
     }
     superiorParent.children[2].innerText = parseInt(parent.children[1].value) * price;
 
-    console.log(parent.children[1].value)
+    // console.log(parent.children[1].value)
   
     for (let i = 0; i < valuesOfMap.length; i++) {
 
       for (let j = 0; j < valuesOfMap[i].length; j++) {
 
-        console.log(superiorParent.children[0].innerText)
+        // console.log(superiorParent.children[0].innerText)
 
         if (valuesOfMap[i][j] == superiorParent.children[0].innerText){
 
@@ -130,8 +130,6 @@ const modifyExistingItemInMap = (id) => {
 const goodsInCart = (id) => {
   let mainContainer = document.getElementById("goodsTable");
   let arrayOfItems = document.getElementsByClassName("item-line-up");
-  console.log(newCounterElement);
-  newCounterElement.test();
   if (arrayOfCounters[id] == undefined) {
   arrayOfCounters[id] = 0;
   arrayOfCounters[id]++;  
