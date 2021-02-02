@@ -29,6 +29,11 @@
 		input{
 			outline: none;
 		}
+
+		button{
+			outline: 0;
+			}
+	
 		/*End of General modifications*/
 		.headerRectangle{
 			position: absolute;
@@ -120,10 +125,6 @@
 			line-height: 19px;
 			
 			color: #000000;						
-		}
-
-		button{
-		outline: 0;
 		}
 
 		.sectionOne{
@@ -333,6 +334,7 @@
 		.hide{
 			visibility: hidden;
 		}
+		
 		.show{
 			visibility: visible;
 		}
